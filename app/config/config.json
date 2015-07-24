@@ -1,0 +1,9 @@
+{
+    "imports": [
+        {
+            "resource": "config_cmd"
+        }
+    ],
+    "help_file": "/app/info/help.md",
+    "path_for_save_report": "/reports/"
+}

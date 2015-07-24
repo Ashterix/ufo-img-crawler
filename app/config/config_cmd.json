@@ -1,0 +1,9 @@
+{
+    "config_cmd" : {
+        "short" : "u:h::",
+        "long"  : [
+            "url:",
+            "help::"
+        ]
+    }
+}

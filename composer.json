@@ -1,0 +1,23 @@
+{
+    "name": "Ashterix/ufo-img-crawler",
+    "type": "project",
+    "description": "Test task for the company Innovation Group. Crawler img tags",
+    "version": "1.0.0-alpha1",
+    "authors": [
+        {
+            "name": "Alex Maystrenko",
+            "email": "doctor_ash_69@mail.ru"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "Ashterix/control-time": "1.*",
+        "ufo-cms/file-system": "2.*"
+    },
+    "autoload": {
+        "psr-0": {
+            "Core\\": "./src",
+            "Crawler\\": "./src"
+        }
+    }
+}
