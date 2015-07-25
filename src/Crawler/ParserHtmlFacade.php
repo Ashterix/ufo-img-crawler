@@ -73,8 +73,6 @@ class ParserHtmlFacade
 
         ControlTime::addWayPoint(md5($this->url));
         $this->setToComplete($parser->countAllImgTags());
-
-        $this->recursiveEnumerationLinks();
     }
 
     /**
@@ -85,20 +83,6 @@ class ParserHtmlFacade
     private function setToComplete($count)
     {
         $this->getQueueObject()->setToComplete($this->url, $count, ControlTime::getPrevData()['from_prev']);
-    }
-
-    /**
-     * Recursive enumeration links
-     */
-    private function recursiveEnumerationLinks()
-    {
-        if (count($this->getQueueObject()->getQueue()) > 0) {
-            foreach ($this->getQueueObject()->getQueue() as $link) {
-                if (count($this->getQueueObject()->getQueue()) == 0) break;
-                $facade = new ParserHtmlFacade($link);
-                $facade->setQueueObject($this->getQueueObject())->run();
-            }
-        }
     }
 
     /**

@@ -41,7 +41,7 @@ class CrawlerCliEndpoint extends CliEndpoint
     protected function checkHelp()
     {
         if (isset($this->options['h']) || isset($this->options['help'])) {
-           $this->runHelp();
+            $this->runHelp();
             CliReturnCode::success();
         }
     }
@@ -83,8 +83,14 @@ class CrawlerCliEndpoint extends CliEndpoint
         $this->write('Start crawler');
         $queue = new Queue();
         ControlTime::init();
-        $facade = new ParserHtmlFacade($url);
-        $facade->setQueueObject($queue)->run();
+        $this->write('WAIT', false, false);
+        do {
+            $urlForCrawler = ($queue->getQueue()) ? current($queue->getQueue()) : $url;
+            $facade = new ParserHtmlFacade($urlForCrawler);
+            $facade->setQueueObject($queue)->run();
+            $this->write(' .', false, false);
+        } while (count($queue->getQueue()) > 0);
+        $this->write('', true, false);
         $this->write("Indexed " . count($queue->getComplete()) . " pages");
         $saver = new Saver($queue->getComplete());
         $this->write("Save to file");
@@ -97,9 +103,11 @@ class CrawlerCliEndpoint extends CliEndpoint
      * Print message
      *
      * @param string $message
+     * @param bool $newline
+     * @param bool $time
      */
-    public function write($message)
+    public function write($message, $newline = true, $time = true)
     {
-        echo  date('H:i:s') . " - $message" . PHP_EOL;
+        echo ($time ? date('H:i:s') . " - " : '') . $message . ($newline ? PHP_EOL : '');
     }
 }

@@ -21,7 +21,6 @@ About:
  to sacrifice writing TTD.
  And so the same abandon optimization and load balancing.
  Thus, this version is not intended for crawler parsing sites with lots of pages.
- I found empirically that the optimal number of pages to him - 200 or less.
 
 Usage:
  options [arguments]
